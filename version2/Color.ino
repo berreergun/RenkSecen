@@ -1,12 +1,17 @@
 void renkoku() {
 
   tcs.getRawData(&r, &g, &b, &c);
-  Serial.print(b);
   ortalama = (r + g + b) / 3; // renk değerlerini topla ve ortalamasını al
   red = r / ortalama; // kırmızı renk değeri oranı
   green = g / ortalama; // yeşil renk değeri oranı
   blue = b / ortalama;
-
+/*  Serial.print(red);
+  Serial.print("      ");
+  Serial.print(green);
+  Serial.print("      ");
+  Serial.print(blue);
+  Serial.println();*/
+  
 }
 
 void renkkaydet() {
@@ -24,7 +29,7 @@ void renkbul() {
       //burada silindiri koyması gerekir.
 
       Serial.print("Rengi buldum şunda:   ");
-      Serial.print(a);
+      Serial.print(a+1);
       Serial.println();
       r1[a] = 0;
       g1[a] = 0;

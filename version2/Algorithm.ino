@@ -1,44 +1,53 @@
-void goUntilT(){
-  while(1){
+void goUntilT() {
+  while (1) {
     followLine();
-    if(computeQtr()<2) break;
-  } 
+    if (computeQtr() < 2) break;
+  }
   stopMotors();
   delay(500);
   goForTurn();
 }
 
-void goForTurn(){
-  while(1){
+void goForTurn() {
+  while (1) {
     followLine();
     qtrread();
-    if(sagqtrValue==0 || solqtrValue==0) break;
+    if (sagqtrValue == 0 || solqtrValue == 0) break;
   }
   stopMotors();
   delay(500);
 }
 
-void goUntilColor(){
-   while(1){
+void goUntilColor() {
+
+  while (1) {
     followLine();
-    if(computeQtr()>5) break;
-  } 
+    renkoku();
+    if (!(((0.65 < red) && (red < 0.70) && (1.15 < green) && (green < 1.25) && (1.10 < blue) && (blue < 1.20)))){
+      Serial.println("iff siyah değil");
+      break;
+    }
+
+  }
+
   stopMotors();
+
   delay(500);
 }
 
-void goBack(){
-   while(1){
-    motorhiz(-50,-50);
+void goBack() {
+  while (1) {
+    motorhiz(-50, -50);
     qtrread();
-    if(sagqtrValue==0 || solqtrValue==0) break;
+    if (sagqtrValue == 0 || solqtrValue == 0) break;
   }
   stopMotors();
   delay(500);
 }
 
 
-void goToRoom(){
+void goToRoom() {
+
   goUntilT();
   turnLeft();
   goUntilColor();
@@ -48,7 +57,7 @@ void goToRoom(){
 }
 
 
-void goToRoomForDrop(){
+void goToRoomForDrop() {
   goUntilT();
   turnLeft();
   goUntilColor();
@@ -57,15 +66,15 @@ void goToRoomForDrop(){
   turnRight();
 }
 
-void goFirst2room(){
+void goFirst2room() {
   goUntilColor();
   renkbul();
   goBack();
   turnRight();
 }
 
-void travelAllRoom(){
-  for(int i=0;i<7;i++){
+void travelAllRoom() {
+  for (int i = 0; i < 7; i++) {
     goToRoom();
     room++;
   }
@@ -73,12 +82,15 @@ void travelAllRoom(){
 
 
 //bu fonksiyon bitmedi düzenlenecek
-void travelAllRoomForDrop(){
+void travelAllRoomForDrop() {
   goFirst2room();
   goFirst2room();
-  
-  for(int i=0;i<7;i++){
+
+  for (int i = 0; i < 6; i++) {
     goToRoomForDrop();
-    room++;
+
   }
+
+  goUntilColor();
+  renkbul();
 }

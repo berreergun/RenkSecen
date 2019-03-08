@@ -1,13 +1,17 @@
 // 0sa beyaz 1se siyah
 #include <Adafruit_TCS34725.h>
 #include <Wire.h>
-#include <AFMotor.h>
+
 //motor define
-AF_DCMotor motorsol(3);
-AF_DCMotor motorsag(4);
+int E1 = 5;
+int M1 = 4;
+int E2 = 6;
+int M2 = 7;
+
 //motor hızları
 int motorsolhiz;
 int motorsaghiz;
+
 uint16_t  r, g, b, c;
 float red, green, blue, ortalama;
 
@@ -38,11 +42,19 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   qtrpinsdefine();
-  motorhiz(ilkmotorsolhiz,ilkmotorsaghiz);
+  motordefine();
+ motorhiz(60, 60);
+ qtrread();
+
 }
 
 void loop() {
-travelAllRoom();
-travelAllRoomForDrop();
-while(1);
+// qtrread();
+ 
+ // renkoku();
+// goUntilT();
+  // followLine();
+  travelAllRoom();
+  travelAllRoomForDrop();
+  while (1);
 }

@@ -1,28 +1,32 @@
-
+void motordefine() {
+  pinMode(M1, OUTPUT);
+  pinMode(M2, OUTPUT);
+}
 void motorhiz(int solhiz, int saghiz) {
   if (solhiz > 0) {
-    motorsol.run(FORWARD);
+    digitalWrite(M1, HIGH);
+
   }
   else {
-    motorsol.run(BACKWARD);
+    digitalWrite(M1, LOW);
 
   }
   if (saghiz > 0) {
-    motorsag.run(FORWARD);
+    digitalWrite(M2, HIGH);
 
   }
   else {
-    motorsag.run(BACKWARD);
+    digitalWrite(M2, LOW);
   }
-  motorsol.setSpeed(abs(solhiz));
-  motorsag.setSpeed(abs(saghiz));
+  analogWrite(E1, solhiz);   //PWM Speed Control
+  analogWrite(E2, saghiz);   //PWM Speed Control
 
 }
 
 void stopMotors() {
-  motorhiz(-ilkmotorsolhiz,-ilkmotorsaghiz);
-  delay(50);
-  motorhiz(0,0);
+  motorhiz(-ilkmotorsolhiz, -ilkmotorsaghiz);
+  delay(10);
+  motorhiz(0, 0);
 }
 
 void turnLeft() {
