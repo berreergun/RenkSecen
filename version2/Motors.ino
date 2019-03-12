@@ -25,12 +25,12 @@ void motorhiz(int solhiz, int saghiz) {
 
 void stopMotors() {
   motorhiz(-ilkmotorsolhiz, -ilkmotorsaghiz);
-  delay(10);
+  
   motorhiz(0, 0);
 }
 
 void turnLeft() {
-  motorhiz(-ilkmotorsolhiz, ilkmotorsaghiz);
+  motorhiz(-50, 50);
   delay(400);
   while (1) {
     qtrread();
@@ -42,13 +42,13 @@ void turnLeft() {
 }
 
 void turnRight() {
-  motorhiz(ilkmotorsolhiz, -ilkmotorsaghiz);
+  motorhiz(70, -30);
   delay(400);
   while (1) {
     qtrread();
     if (sensorvalues[4] == 0)  break;
   }
-  motorhiz(-50, 50);
+  motorhiz(-70, 30);
   delay(50);
   motorhiz(0, 0);
 }

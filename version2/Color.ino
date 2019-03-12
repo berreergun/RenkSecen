@@ -5,12 +5,20 @@ void renkoku() {
   red = r / ortalama; // kırmızı renk değeri oranı
   green = g / ortalama; // yeşil renk değeri oranı
   blue = b / ortalama;
-/*  Serial.print(red);
+  Serial.print(red);
   Serial.print("      ");
   Serial.print(green);
   Serial.print("      ");
   Serial.print(blue);
-  Serial.println();*/
+  Serial.println();
+  Serial.println("-------");
+   Serial.print(r);
+  Serial.print("      ");
+  Serial.print(g);
+  Serial.print("      ");
+  Serial.print(b);
+  Serial.println();
+  
   
 }
 
