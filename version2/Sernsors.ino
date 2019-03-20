@@ -8,9 +8,11 @@ void qtrread() {
 }
 
 
+
 void qtrpinsdefine() {
   for (int i = 0; i < 6; i++) {
     pinMode(qtrpins[i], INPUT_PULLUP);
+    
   }
   pinMode(solqtr, INPUT_PULLUP);
   pinMode(sagqtr, INPUT_PULLUP);
@@ -18,6 +20,7 @@ void qtrpinsdefine() {
 
 
 void qtryazdirma() {
+
   for (int i = 0; i < 6; i++) {
     Serial.print(sensorvalues[i]);
   }

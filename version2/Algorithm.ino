@@ -1,8 +1,11 @@
 void goUntilT() {
   while (1) {
     followLine();
+    //Serial.print("qtr");
+   // Serial.println(computeQtr());
     if (computeQtr() < 2) break;
   }
+ 
   stopMotors();
   delay(500);
   goForTurn();
@@ -14,16 +17,39 @@ void goForTurn() {
     qtrread();
     if (sagqtrValue == 0 || solqtrValue == 0) break;
   }
+
   stopMotors();
   delay(500);
 }
 
+
 void goUntilColor() {
-  int renk = 0;
   while (1) {
+    renkCounter = 0;
+    followLine();
+    renkoku();
+    if(colorControl()) break;
+  }
+  stopMotors();
+  delay(500);
+}
+
+boolean colorControl() {
+  while (!((0.65 < red) && (red < 0.70) && (1.15 < green) && (green < 1.25) && (1.09 < blue) && (blue < 1.20))) {
+    renkCounter++;
+    if (renkCounter > 2) return true;
+    renkoku();
+  }
+  return false;
+}
+/*void goUntilColor() {
+   int renk = 0;
+  while (1) {
+   
     followLine();
 
     renkoku();
+   
     if (!(((0.65 < red) && (red < 0.70) && (1.15 < green) && (green < 1.25) && (1.09 < blue) && (blue < 1.20)))) {
 
       renk = renk + 1;
@@ -32,26 +58,29 @@ void goUntilColor() {
 
 
     }
-    if (renk > 1) {
-      Serial.println("iff siyah değil");
+    if (renk > 2) {
+      Serial.println(" siyah değil, odadayım ");
       break;
     }
   }
-
+    
   stopMotors();
 
 
   delay(100);
-  goUntilPrisma();
-}
+ // goUntilPrisma();
+}*/
 
 void goBack() {
   while (1) {
-    motorhiz(-60, -50);
+    motorhiz(-50, -55);
     qtrread();
+  
+    
     if (sagqtrValue == 0 || solqtrValue == 0) break;
   }
-  stopMotors();
+    
+  stopMotorsToBack();
   delay(500);
 }
 int amIRight() {
@@ -64,29 +93,34 @@ int amIRight() {
     return 3;
 }
 void goUntilPrisma() {
-
+  
   while (amIRight() == 2) {
-    motorhiz(50, 50);
+    Serial.println("renge gidiyorum");
+    followLine();
+   // motorhiz(50, 50);
 
 
     if (amIRight() == 1 ) {
-      //Serial.println("IamRight");
+      Serial.println("I am Right");
+      stopMotors();
+      delay(3000);
       break;
     }
 
     else if (amIRight() == 3) {
-      // Serial.println("Iam wrong");
+      Serial.println("I am wrong");
+   
       goBack();
-      delay(1000);
-      goUntilColor();
- 
+     // delay(20);
+      goUntilPrisma();
+     
 
     }
 
   }
 
-  stopMotors();
-  delay(1000);
+ /* stopMotors();
+  delay(2000);*/
 }
 /* if (sharporta) break;
 
@@ -110,7 +144,7 @@ void goToRoom() {
 
   goUntilT();
   turnLeft();
-  goUntilColor();
+ // goUntilColor();
   goUntilPrisma();
   renkkaydet();
   goBack();

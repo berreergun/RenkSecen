@@ -2,7 +2,6 @@ void followLine(){
    int p = positionQtr();
    motorhiz(ilkmotorsolhiz - p * kp, ilkmotorsaghiz + p * kp);
 }
-
 int positionQtr() {
    qtrread();
   if (sensorvalues[2] == 0 && sensorvalues[3] == 0) {

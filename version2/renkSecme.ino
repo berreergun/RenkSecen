@@ -18,16 +18,16 @@ float red, green, blue, ortalama;
 
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
 
-
-const int ilkmotorsolhiz = 70;
-const int ilkmotorsaghiz = 70;
-float kp = 15;
+int renkCounter = 0;
+const int ilkmotorsolhiz = 50;
+const int ilkmotorsaghiz = 55;
+float kp = 30;
 bool cizgitam = false;
 bool soladondu = false;
 bool geridonecek = false;
 //qtr pins
 const byte qtrpins[] = {22, 24, 26, 28, 30, 32};
-byte sensorvalues[6];
+byte sensorvalues[]={1,1,1,1,1,1};
 const byte solqtr = 38;
 const byte sagqtr = 36;
 byte sagqtrValue;
@@ -37,36 +37,44 @@ int room = 0;
 float r1[7];
 float g1[7];
 float b1[7];
-const int sharpsol=43;
-const int sharporta=45;
-const int sharpsag =47;
+const int sharpsol = 43;
+const int sharporta = 45;
+const int sharpsag = 47;
+
+
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   qtrpinsdefine();
+
+
   motordefine();
- //motorhiz(60, 60);
- qtrread();
+  //motorhiz(60, 60);
+  qtrread();
+ 
 
 }
 
 void loop() {
-// qtrread();
-motorhiz(60, 60);
+  qtrread();
+  motorhiz(ilkmotorsolhiz, ilkmotorsaghiz);
+  //qtryazdirma();
+  /*Serial.print(digitalRead(sharpsol));
 
-/*Serial.print(digitalRead(sharpsol));
+    Serial.print(digitalRead(sharporta));
 
-Serial.print(digitalRead(sharporta));
+    Serial.print(digitalRead(sharpsag));
+    Serial.println();*/
+//  goToRoom();
+ // goToRoom();
+  renkoku();
+  // delay(500);
+  // delay(500);
 
-Serial.print(digitalRead(sharpsag));
-Serial.println();*/
-
-  //renkoku();
- // delay(500);
-// goUntilT();
-   //followLine();
- travelAllRoom();
+  // followLine();
+  // qtryazdirma();
+   travelAllRoom();
   //travelAllRoomForDrop();
-  while (1);
+  //while (1);
 }
