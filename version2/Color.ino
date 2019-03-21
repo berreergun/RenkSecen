@@ -27,21 +27,23 @@ void renkkaydet() {
   r1[room] = red ;
   g1[room] = green ;
   b1[room] = blue ;
+  Serial.println("Renk Kaydedildi");
 }
 
 
-void renkbul() {
+int renkbul() {
   renkoku();
   for ( int a = 0 ; a < 7 ; a++) {
     if (((red > r1[a] - 0.05) && (red < r1[a] + 0.05)) && ((green > g1[a] - 0.05) && (green < g1[a] + 0.05)) && ((blue > b1[a] - 0.05) && (blue < b1[a] + 0.05))) {
       //burada silindiri koyması gerekir.
 
       Serial.print("Rengi buldum şunda:   ");
-      Serial.print(a+1);
+      Serial.print(a);
       Serial.println();
       r1[a] = 0;
       g1[a] = 0;
       b1[a] = 0;
+      return a;
     }
   }
 

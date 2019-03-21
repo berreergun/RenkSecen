@@ -12,7 +12,7 @@ void qtrread() {
 void qtrpinsdefine() {
   for (int i = 0; i < 6; i++) {
     pinMode(qtrpins[i], INPUT_PULLUP);
-    
+
   }
   pinMode(solqtr, INPUT_PULLUP);
   pinMode(sagqtr, INPUT_PULLUP);
@@ -34,13 +34,20 @@ void qtryazdirma() {
 
 }
 
-int computeQtr(){
-  int value=0;
+int computeQtr() {
+  int value = 0;
   qtrread();
 
   for (int i = 0; i < 6; i++) {
-   value+= sensorvalues[i];
+    value += sensorvalues[i];
   }
 
   return value;
+}
+
+void defineAll() {
+  qtrpinsdefine();
+  motordefine();
+  pinMode(stepPin, OUTPUT);
+  pinMode(dirPin, OUTPUT);
 }

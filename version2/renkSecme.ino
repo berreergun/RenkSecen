@@ -33,7 +33,6 @@ const byte sagqtr = 36;
 byte sagqtrValue;
 byte solqtrValue;
 int room = 0;
-//sharplar tanımlanacak
 float r1[7];
 float g1[7];
 float b1[7];
@@ -41,40 +40,25 @@ const int sharpsol = 43;
 const int sharporta = 45;
 const int sharpsag = 47;
 
-
+const int stepPin = 31; //değişecek
+const int dirPin = 33; 
+int currentBlock=0;
+enum directions {
+  RIGHT,
+  LEFT
+};
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
-  qtrpinsdefine();
-
-
-  motordefine();
-  //motorhiz(60, 60);
+  defineAll();
+  motorhiz(ilkmotorsolhiz, ilkmotorsaghiz);
   qtrread();
- 
-
 }
 
 void loop() {
-  qtrread();
-  motorhiz(ilkmotorsolhiz, ilkmotorsaghiz);
-  //qtryazdirma();
-  /*Serial.print(digitalRead(sharpsol));
-
-    Serial.print(digitalRead(sharporta));
-
-    Serial.print(digitalRead(sharpsag));
-    Serial.println();*/
-//  goToRoom();
- // goToRoom();
-  renkoku();
-  // delay(500);
-  // delay(500);
-
-  // followLine();
-  // qtryazdirma();
+ 
    travelAllRoom();
-  //travelAllRoomForDrop();
-  //while (1);
+  travelAllRoomForDrop();
+  while (1);
 }

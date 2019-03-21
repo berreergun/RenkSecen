@@ -2,10 +2,10 @@ void goUntilT() {
   while (1) {
     followLine();
     //Serial.print("qtr");
-   // Serial.println(computeQtr());
+    // Serial.println(computeQtr());
     if (computeQtr() < 2) break;
   }
- 
+
   stopMotors();
   delay(500);
   goForTurn();
@@ -28,7 +28,7 @@ void goUntilColor() {
     renkCounter = 0;
     followLine();
     renkoku();
-    if(colorControl()) break;
+    if (colorControl()) break;
   }
   stopMotors();
   delay(500);
@@ -45,11 +45,11 @@ boolean colorControl() {
 /*void goUntilColor() {
    int renk = 0;
   while (1) {
-   
+
     followLine();
 
     renkoku();
-   
+
     if (!(((0.65 < red) && (red < 0.70) && (1.15 < green) && (green < 1.25) && (1.09 < blue) && (blue < 1.20)))) {
 
       renk = renk + 1;
@@ -63,23 +63,21 @@ boolean colorControl() {
       break;
     }
   }
-    
+
   stopMotors();
 
 
   delay(100);
- // goUntilPrisma();
-}*/
+  // goUntilPrisma();
+  }*/
 
 void goBack() {
   while (1) {
-    motorhiz(-50, -55);
+    motorhiz(-50, -60);
     qtrread();
-  
-    
     if (sagqtrValue == 0 || solqtrValue == 0) break;
   }
-    
+
   stopMotorsToBack();
   delay(500);
 }
@@ -93,11 +91,11 @@ int amIRight() {
     return 3;
 }
 void goUntilPrisma() {
-  
+
   while (amIRight() == 2) {
     Serial.println("renge gidiyorum");
     followLine();
-   // motorhiz(50, 50);
+    // motorhiz(50, 50);
 
 
     if (amIRight() == 1 ) {
@@ -109,44 +107,26 @@ void goUntilPrisma() {
 
     else if (amIRight() == 3) {
       Serial.println("I am wrong");
-   
+
       goBack();
-     // delay(20);
+      // delay(20);
       goUntilPrisma();
-     
+
 
     }
 
   }
 
- /* stopMotors();
-  delay(2000);*/
 }
-/* if (sharporta) break;
-
-  }
-  if(sharpSag){
-  goBack();
-  delay(1000);
-  goUntilColor();
-
-  }
-  if(sharpSol){
-  goBack();
-  delay(1000);
-  goUntilColor();
-  }*/
-
-
 
 
 void goToRoom() {
 
   goUntilT();
   turnLeft();
- // goUntilColor();
   goUntilPrisma();
   renkkaydet();
+  goStep(1,LEFT);
   goBack();
   turnRight();
 }
@@ -156,6 +136,7 @@ void goToRoomForDrop() {
   goUntilT();
   turnLeft();
   goUntilColor();
+  //findBlock();
   renkbul();
   goBack();
   turnRight();
