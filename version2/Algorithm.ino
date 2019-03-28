@@ -125,7 +125,7 @@ void goToRoom() {
   goUntilT();
   turnLeft();
   goUntilPrisma();
-  turnServo()
+  turnServo();
   renkkaydet();
   goStep(1,LEFT);
   goBack();
@@ -138,7 +138,7 @@ void goToRoomForDrop() {
   turnLeft();
   goUntilColor();
   findBlock();
-  //renkbul();
+  turnServoForDrop();
   goBack();
   turnRight();
 }
@@ -146,7 +146,7 @@ void goToRoomForDrop() {
 void goFirst2room() {
   goUntilColor();
   findBlock();
-  //renkbul();
+  turnServoForDrop();
   goBack();
   turnRight();
 }

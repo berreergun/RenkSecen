@@ -4,8 +4,8 @@ void motordefine() {
 
 
    ///Servo Define
-   servoBuyuk.attach(9);
-  servoKucuk.attach(8);
+   servoBuyuk.attach(39);
+  servoKucuk.attach(41);
   
 }
   
@@ -119,15 +119,33 @@ void findBlock() {
 
 void turnServo(){
   
-   servoTurn(servoBuyuk, 150);
-  servoTurn(servoKucuk, 160);
-  servoTurn(servoBuyuk, 8);
+   servoTurn(servoBuyuk, 150);//kolun asagı inmesi için
+  servoTurn(servoKucuk, 160);//cismi al
+  servoTurn(servoBuyuk, 8);//kol yukarı cık
+  delay(500);
+  servoTurn(servoKucuk, 140);//cismi bırak
+  delay(500);
+  servoTurn(servoBuyuk, 80);//kol orta konuma gel
+  servoTurn(servoKucuk, 105);//gripper açık konuma gel
   delay(1000);
-  servoTurn(servoKucuk, 140);
-  servoTurn(servoBuyuk, 80);
-  servoTurn(servoKucuk, 105);
-  delay(3000);
   
+  
+}
+
+
+void turnServoForDrop(){
+  
+   servoTurn(servoBuyuk, 8);//kol yukarı cık
+   delay(500);
+   servoTurn(servoKucuk, 160);//cismi al
+   delay(500);
+   servoTurn(servoBuyuk, 150);//kolun asagı inmesi için
+   servoTurn(servoKucuk, 140);//cismi bırak
+    delay(500);
+   servoTurn(servoBuyuk, 80);//kol orta konuma gel
+   servoTurn(servoKucuk, 105);//gripper açık konuma gel
+   delay(1000);
+   
   
 }
 

@@ -20,8 +20,8 @@ float red, green, blue, ortalama;
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
 
 int renkCounter = 0;
-const int ilkmotorsolhiz = 50;
-const int ilkmotorsaghiz = 55;
+const int ilkmotorsolhiz = 60;
+const int ilkmotorsaghiz = 70;
 float kp = 30;
 bool cizgitam = false;
 bool soladondu = false;
@@ -65,8 +65,10 @@ void setup() {
 }
 
 void loop() {
+turnServo();
+turnServoForDrop();
  
-  travelAllRoom();
+/*  travelAllRoom();
   travelAllRoomForDrop();
-  while (1);
+  while (1);*/
 }
