@@ -73,7 +73,7 @@ boolean colorControl() {
 
 void goBack() {
   while (1) {
-    motorhiz(-50, -60);
+    motorhiz(-50, -68);
     qtrread();
     if (sagqtrValue == 0 || solqtrValue == 0) break;
   }
@@ -125,6 +125,7 @@ void goToRoom() {
   goUntilT();
   turnLeft();
   goUntilPrisma();
+  turnServo()
   renkkaydet();
   goStep(1,LEFT);
   goBack();
@@ -136,15 +137,16 @@ void goToRoomForDrop() {
   goUntilT();
   turnLeft();
   goUntilColor();
-  //findBlock();
-  renkbul();
+  findBlock();
+  //renkbul();
   goBack();
   turnRight();
 }
 
 void goFirst2room() {
   goUntilColor();
-  renkbul();
+  findBlock();
+  //renkbul();
   goBack();
   turnRight();
 }
@@ -168,5 +170,6 @@ void travelAllRoomForDrop() {
   }
 
   goUntilColor();
-  renkbul();
+  findBlock();
+ // renkbul();
 }

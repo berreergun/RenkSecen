@@ -40,11 +40,12 @@ int renkbul() {
       Serial.print("Rengi buldum şunda:   ");
       Serial.print(a);
       Serial.println();
-      r1[a] = 0;
-      g1[a] = 0;
-      b1[a] = 0;
+      r1[a] = 999;
+      g1[a] = 999;
+      b1[a] = 999;
       return a;
     }
   }
+  return -1;
 
 }
