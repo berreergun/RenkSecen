@@ -118,33 +118,36 @@ void findBlock() {
 }
 
 void turnServo(){
-  
-   servoTurn(servoBuyuk, 150);//kolun asagı inmesi için
-  servoTurn(servoKucuk, 160);//cismi al
-  servoTurn(servoBuyuk, 8);//kol yukarı cık
+   
+  servoTurn(servoBuyuk, 150);//kolun asagı inmesi için
+  servoTurn(servoKucuk, 85);//cismi al
   delay(500);
-  servoTurn(servoKucuk, 140);//cismi bırak
+  servoTurn(servoBuyuk, 5);//kol yukarı cık
   delay(500);
-  servoTurn(servoBuyuk, 80);//kol orta konuma gel
-  servoTurn(servoKucuk, 105);//gripper açık konuma gel
+  servoTurn(servoKucuk, 70);//cismi bırak
+  delay(500);
+  servoTurn(servoBuyuk, 90);//kol orta konuma gel
+  servoTurn(servoKucuk, 50);//gripper açık konuma gel
   delay(1000);
+    
   
   
 }
 
 
 void turnServoForDrop(){
-  
-   servoTurn(servoBuyuk, 8);//kol yukarı cık
+   servoTurn(servoKucuk, 60);//gripper açık konuma gel
+   servoTurn(servoBuyuk, 5);//kol yukarı cık
    delay(500);
-   servoTurn(servoKucuk, 160);//cismi al
+   servoTurn(servoKucuk, 85);//cismi al
    delay(500);
    servoTurn(servoBuyuk, 150);//kolun asagı inmesi için
-   servoTurn(servoKucuk, 140);//cismi bırak
+   servoTurn(servoKucuk, 65);//cismi bırak
     delay(500);
-   servoTurn(servoBuyuk, 80);//kol orta konuma gel
-   servoTurn(servoKucuk, 105);//gripper açık konuma gel
+   servoTurn(servoBuyuk, 90);//kol orta konuma gel
+   servoTurn(servoKucuk, 60);//gripper açık konuma gel
    delay(1000);
+   
    
   
 }

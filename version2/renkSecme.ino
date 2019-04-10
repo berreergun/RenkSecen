@@ -20,8 +20,8 @@ float red, green, blue, ortalama;
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
 
 int renkCounter = 0;
-const int ilkmotorsolhiz = 60;
-const int ilkmotorsaghiz = 70;
+const int ilkmotorsolhiz = 70;
+const int ilkmotorsaghiz = 80;
 float kp = 30;
 bool cizgitam = false;
 bool soladondu = false;
@@ -48,8 +48,8 @@ Servo servoKucuk;  /* servo motor nesnesi yaratildi */
 Servo servoBuyuk;
 Servo myservomotor; // sınıfın bir örneğini aldık
 
-
-
+boolean checkBox=false;
+unsigned int start;
 enum directions {
   RIGHT,
   LEFT
@@ -59,16 +59,16 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   defineAll();
+  servoTurn(servoKucuk, 60);
+  servoTurn(servoBuyuk, 80);
  
  // motorhiz(ilkmotorsolhiz, ilkmotorsaghiz);
   qtrread();
 }
 
 void loop() {
-turnServo();
-turnServoForDrop();
  
-/*  travelAllRoom();
+  travelAllRoom();
   travelAllRoomForDrop();
-  while (1);*/
+  while (1);
 }
