@@ -7,7 +7,7 @@ void goUntilT() {
   }
 
   stopMotors();
-  delay(500);
+  //delay(50);
   goForTurn();
 }
 
@@ -19,7 +19,7 @@ void goForTurn() {
   }
 
   stopMotors();
-  delay(500);
+//  delay(250);
 }
 
 
@@ -73,13 +73,13 @@ boolean colorControl() {
 
 void goBack() {
   while (1) {
-    motorhiz(-50, -68);
+    motorhiz(-40, -58);
     qtrread();
     if (sagqtrValue == 0 || solqtrValue == 0) break;
   }
 
   stopMotorsToBack();
-  delay(500);
+  delay(300);
 }
 int amIRight() {
 
@@ -91,30 +91,25 @@ int amIRight() {
     return 3;
 }
 void goUntilPrisma() {
-
-  while (amIRight() == 2) {
-    Serial.println("renge gidiyorum");
+ 
+  while (1) {
     followLine();
     // motorhiz(50, 50);
-
-
     if (amIRight() == 1 ) {
       Serial.println("I am Right");
-      stopMotors();
-      delay(3000);
+       stopMotors();
+      
+     delay(700);
       break;
     }
-
     else if (amIRight() == 3) {
       Serial.println("I am wrong");
-
       goBack();
       // delay(20);
-      goUntilPrisma();
-
-
+      //goUntilPrisma();
     }
-
+    
+  
   }
 
 }
@@ -125,6 +120,7 @@ void goToRoom() {
   goUntilT();
   turnLeft();
   goUntilPrisma();
+   motorhiz(0, 0);
   turnServo();
   renkkaydet();
   goStep(1,LEFT);
@@ -171,5 +167,6 @@ void travelAllRoomForDrop() {
 
   goUntilColor();
   findBlock();
- // renkbul();
+  turnServoForDrop();
+  //renkbul();
 }
