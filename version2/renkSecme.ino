@@ -21,7 +21,7 @@ Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS3472
 
 int renkCounter = 0;
 const int ilkmotorsolhiz = 70;
-const int ilkmotorsaghiz = 80;
+const int ilkmotorsaghiz = 75;
 float kp = 30;
 bool cizgitam = false;
 bool soladondu = false;
@@ -61,13 +61,11 @@ void setup() {
   defineAll();
   servoTurn(servoKucuk, 60);
   servoTurn(servoBuyuk, 80);
- 
- // motorhiz(ilkmotorsolhiz, ilkmotorsaghiz);
   qtrread();
 }
 
 void loop() {
-  //qtryazdirma();
+ 
   travelAllRoom();
   travelAllRoomForDrop();
   while (1);

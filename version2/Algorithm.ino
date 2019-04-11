@@ -35,7 +35,7 @@ void goUntilColor() {
 }
 
 boolean colorControl() {
-  while (!((0.65 < red) && (red < 0.70) && (1.15 < green) && (green < 1.25) && (1.09 < blue) && (blue < 1.20))) {
+  while (!((0.65 < red) && (red < 0.75) && (1.15 < green) && (green < 1.25) && (1.09 < blue) && (blue < 1.20))) {
     renkCounter++;
     Serial.println("while");
     if (renkCounter > 2){
@@ -46,52 +46,14 @@ boolean colorControl() {
   }
   return false;
 }
-/*void goUntilColor() {
-   int renk = 0;
-  while (1) {
 
-    followLine();
-
-    renkoku();
-
-    if (!(((0.65 < red) && (red < 0.70) && (1.15 < green) && (green < 1.25) && (1.09 < blue) && (blue < 1.20)))) {
-
-      renk = renk + 1;
-      Serial.print("renk");
-      Serial.print(renk);
-
-
-    }
-    if (renk > 2) {
-      Serial.println(" siyah değil, odadayım ");
-      break;
-    }
-  }
-
-  stopMotors();
-
-
-  delay(100);
-  // goUntilPrisma();
-  }*/
 
 void goBack() {
   while (1) {
     motorhiz(-95, -85);   //-40 -65 ti
     qtrread();
     if (sagqtrValue == 0 || solqtrValue == 0) break;
-  /* if (sagqtrValue == 0 || solqtrValue == 0){
-     if(solqtrValue == 0){
-      motorhiz(0, -10);
-      if(sagqtrValue == 0) break;
-    }
-     if(sagqtrValue == 0){
-      motorhiz(-10, 0);
-      if(solqtrValue == 0) break;
-    }
-   }*/
-   
-  }
+   }
 
   stopMotorsToBack();
   delay(300);//elleme
@@ -102,8 +64,6 @@ void goBackIfRight() {
     motorhiz(-90, -60);   
     qtrread();
     if (sagqtrValue == 0 || solqtrValue == 0) break;
-
-   
   }
 
   stopMotorsToBack();
@@ -121,13 +81,13 @@ void goBackIfLeft() {
 
 int amIRight() {
 
-  if (digitalRead(sharpsol) == 1 && digitalRead(sharpsag) == 1 && digitalRead(sharporta) == 0)
+  if ((digitalRead(sharpsol) == 1 || digitalRead(sharpsag) == 1) && digitalRead(sharporta) == 0)
     return 1;
   else if (digitalRead(sharpsol) == 1 && digitalRead(sharpsag) == 1 && digitalRead(sharporta) == 1)
     return 2;
-  else if(digitalRead(sharpsol) == 0 && (digitalRead(sharpsag) == 1 || digitalRead(sharporta) == 1))
+  else if(digitalRead(sharpsol) == 0 && (digitalRead(sharpsag) == 1 && digitalRead(sharporta) == 1))
     return 3;
-  else if(digitalRead(sharpsag) == 0 && (digitalRead(sharpsol) == 1 || digitalRead(sharporta) == 1))
+  else if(digitalRead(sharpsag) == 0 && (digitalRead(sharpsol) == 1 && digitalRead(sharporta) == 1))
     return 4;
   else return 5;
 }
@@ -137,41 +97,33 @@ void goUntilPrisma() {
     followLine();
     // motorhiz(50, 50);
     if (amIRight() == 1 ) {
-      Serial.println("I am Right");
-       stopMotors();
-      
-     delay(200);
+      //Serial.println("I am Right");
+      stopMotors();
+      delay(200);
       break;
     }
     else if (amIRight() == 3) {
-      Serial.println("I am wrong");
+     // Serial.println("I am wrong");
       goBackIfLeft();
-      // delay(20);
-      //goUntilPrisma();
     }
     else if (amIRight() == 4) {
-      Serial.println("I am wrong");
+     // Serial.println("I am wrong");
       goBackIfRight();
-     
-    }
+     }
     else if (amIRight() == 5) {
-      Serial.println("I am wrong");
+     // Serial.println("I am wrong");
       goBack();
-      // delay(20);
-      //goUntilPrisma();
     }
-  
   }
 
 }
-
 
 void goToRoom() {
 
   goUntilT();
   turnLeft();
   goUntilPrisma();
-   motorhiz(0, 0);
+  motorhiz(0, 0);
   turnServo();
   renkkaydet();
   goStep(1,LEFT);
@@ -191,6 +143,8 @@ void goToRoomForDrop() {
 }
 
 void goFirst2room() {
+  motorhiz(-200, -190);
+  delay(67);
   goUntilColor();
   findBlock();
   turnServoForDrop();
@@ -206,7 +160,7 @@ void travelAllRoom() {
 }
 
 
-//bu fonksiyon bitmedi düzenlenecek
+
 void travelAllRoomForDrop() {
   goFirst2room();
   goFirst2room();
@@ -219,5 +173,7 @@ void travelAllRoomForDrop() {
   goUntilColor();
   findBlock();
   turnServoForDrop();
-  //renkbul();
+
+  
+  
 }

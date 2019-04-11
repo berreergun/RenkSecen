@@ -12,14 +12,7 @@ void renkoku() {
   Serial.print(blue);
   Serial.println();
   Serial.println("-------");
-   Serial.print(r);
-  Serial.print("      ");
-  Serial.print(g);
-  Serial.print("      ");
-  Serial.print(b);
-  Serial.println();
-  
-  
+   
 }
 
 void renkkaydet() {

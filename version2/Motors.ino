@@ -39,14 +39,15 @@ void stopMotors() {
 }
 void stopMotorsToBack() {
   motorhiz(ilkmotorsolhiz, ilkmotorsaghiz);
-  delay(30);
+  delay(20);
+  
   motorhiz(0, 0);
 }
 
 
 
 void turnLeft() {
-  motorhiz(-50, 70);
+  motorhiz(-200, 70);
   delay(400);
   while (1) {
     qtrread();
@@ -55,13 +56,13 @@ void turnLeft() {
         break;
     }
   }
-  motorhiz(50, -70);
+  motorhiz(50, -180);
   delay(50);
   motorhiz(0, 0);
 }
 
 void turnRight() {
-  motorhiz(50, -70);
+  motorhiz(50, -180);
   delay(500);
   while (1) {
     qtrread();
@@ -70,7 +71,21 @@ void turnRight() {
         break;
     }
   }
-  motorhiz(-50, 70);
+  motorhiz(-200, 70);
+  delay(50);
+  motorhiz(0, 0);
+}
+void turnRightForFirst() {
+  motorhiz(0, -90);
+  delay(500);
+  while (1) {
+    qtrread();
+    if (sensorvalues[4] == 0) {
+      if (sensorvalues[5] == 0)
+        break;
+    }
+  }
+  motorhiz(0, 90);
   delay(50);
   motorhiz(0, 0);
 }
