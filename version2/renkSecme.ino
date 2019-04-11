@@ -67,7 +67,7 @@ void setup() {
 }
 
 void loop() {
- 
+  //qtryazdirma();
   travelAllRoom();
   travelAllRoomForDrop();
   while (1);

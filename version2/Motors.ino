@@ -17,7 +17,7 @@ void motorhiz(int solhiz, int saghiz) {
   }
   else {
     digitalWrite(M1, LOW);
-
+  //  solhiz=0-solhiz;
   }
   if (saghiz > 0) {
     digitalWrite(M2, HIGH);
@@ -25,6 +25,7 @@ void motorhiz(int solhiz, int saghiz) {
   }
   else {
     digitalWrite(M2, LOW);
+   // saghiz=0-saghiz;
   }
   analogWrite(E1, solhiz);   //PWM Speed Control
   analogWrite(E2, saghiz);   //PWM Speed Control
@@ -45,7 +46,7 @@ void stopMotorsToBack() {
 
 
 void turnLeft() {
-  motorhiz(-50, 65);
+  motorhiz(-50, 70);
   delay(400);
   while (1) {
     qtrread();
@@ -54,22 +55,22 @@ void turnLeft() {
         break;
     }
   }
-  motorhiz(50, -50);
+  motorhiz(50, -70);
   delay(50);
   motorhiz(0, 0);
 }
 
 void turnRight() {
-  motorhiz(50, -65);
-  delay(400);
+  motorhiz(50, -70);
+  delay(500);
   while (1) {
     qtrread();
-    if (sensorvalues[2] == 0) {
-      if (sensorvalues[3] == 0)
+    if (sensorvalues[4] == 0) {
+      if (sensorvalues[5] == 0)
         break;
     }
   }
-  motorhiz(-50, 50);
+  motorhiz(-50, 70);
   delay(50);
   motorhiz(0, 0);
 }
@@ -95,7 +96,7 @@ void goStep(int blockNumber , int directionn) {
     digitalWrite(stepPin, LOW);
     delay(10);
   }
-  delay(1000); //ayarlanabilir kısım
+  delay(100); //ayarlanabilir kısım
 }
 
 void findBlock() {
@@ -128,7 +129,7 @@ void turnServo(){
   delay(500);
   servoTurn(servoBuyuk, 90);//kol orta konuma gel
   servoTurn(servoKucuk, 50);//gripper açık konuma gel
-  delay(1000);
+  delay(500);
     
   
   
@@ -146,7 +147,7 @@ void turnServoForDrop(){
     delay(500);
    servoTurn(servoBuyuk, 90);//kol orta konuma gel
    servoTurn(servoKucuk, 60);//gripper açık konuma gel
-   delay(1000);
+   delay(500);
    
    
   

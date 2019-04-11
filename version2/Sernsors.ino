@@ -10,6 +10,7 @@ void qtrread() {
 
 
 void qtrpinsdefine() {
+  
   for (int i = 0; i < 6; i++) {
     pinMode(qtrpins[i], INPUT_PULLUP);
 
@@ -20,7 +21,7 @@ void qtrpinsdefine() {
 
 
 void qtryazdirma() {
-
+qtrread();
   for (int i = 0; i < 6; i++) {
     Serial.print(sensorvalues[i]);
   }
@@ -50,4 +51,7 @@ void defineAll() {
   motordefine();
   pinMode(stepPin, OUTPUT);
   pinMode(dirPin, OUTPUT);
+  pinMode(sharpsol, INPUT_PULLUP);
+  pinMode(sharpsag, INPUT_PULLUP);
+  pinMode(sharporta, INPUT_PULLUP);
 }

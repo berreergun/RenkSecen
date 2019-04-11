@@ -31,13 +31,17 @@ void goUntilColor() {
     if (colorControl()) break;
   }
   stopMotors();
-  delay(500);
+  delay(100);
 }
 
 boolean colorControl() {
   while (!((0.65 < red) && (red < 0.70) && (1.15 < green) && (green < 1.25) && (1.09 < blue) && (blue < 1.20))) {
     renkCounter++;
-    if (renkCounter > 2) return true;
+    Serial.println("while");
+    if (renkCounter > 2){
+      Serial.println("if");
+      return true;
+    }
     renkoku();
   }
   return false;
@@ -73,22 +77,59 @@ boolean colorControl() {
 
 void goBack() {
   while (1) {
-    motorhiz(-40, -58);
+    motorhiz(-95, -85);   //-40 -65 ti
     qtrread();
     if (sagqtrValue == 0 || solqtrValue == 0) break;
+  /* if (sagqtrValue == 0 || solqtrValue == 0){
+     if(solqtrValue == 0){
+      motorhiz(0, -10);
+      if(sagqtrValue == 0) break;
+    }
+     if(sagqtrValue == 0){
+      motorhiz(-10, 0);
+      if(solqtrValue == 0) break;
+    }
+   }*/
+   
   }
 
   stopMotorsToBack();
-  delay(300);
+  delay(300);//elleme
 }
+
+void goBackIfRight() {
+  while (1) {
+    motorhiz(-90, -60);   
+    qtrread();
+    if (sagqtrValue == 0 || solqtrValue == 0) break;
+
+   
+  }
+
+  stopMotorsToBack();
+  delay(300);//elleme
+}
+void goBackIfLeft() {
+  while (1) {
+    motorhiz(-80, -100);   
+    qtrread();
+    if (sagqtrValue == 0 || solqtrValue == 0) break;
+}
+  stopMotorsToBack();
+  delay(300);//elleme
+}
+
 int amIRight() {
 
   if (digitalRead(sharpsol) == 1 && digitalRead(sharpsag) == 1 && digitalRead(sharporta) == 0)
     return 1;
   else if (digitalRead(sharpsol) == 1 && digitalRead(sharpsag) == 1 && digitalRead(sharporta) == 1)
     return 2;
-  else
+  else if(digitalRead(sharpsol) == 0 && (digitalRead(sharpsag) == 1 || digitalRead(sharporta) == 1))
     return 3;
+  else if(digitalRead(sharpsag) == 0 && (digitalRead(sharpsol) == 1 || digitalRead(sharporta) == 1))
+    return 4;
+  else return 5;
 }
 void goUntilPrisma() {
  
@@ -99,16 +140,26 @@ void goUntilPrisma() {
       Serial.println("I am Right");
        stopMotors();
       
-     delay(700);
+     delay(200);
       break;
     }
     else if (amIRight() == 3) {
+      Serial.println("I am wrong");
+      goBackIfLeft();
+      // delay(20);
+      //goUntilPrisma();
+    }
+    else if (amIRight() == 4) {
+      Serial.println("I am wrong");
+      goBackIfRight();
+     
+    }
+    else if (amIRight() == 5) {
       Serial.println("I am wrong");
       goBack();
       // delay(20);
       //goUntilPrisma();
     }
-    
   
   }
 
